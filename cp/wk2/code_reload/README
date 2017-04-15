@@ -1,0 +1,41 @@
+1> cd("old").
+/home/cell/code/erlang_mooc/cp/wk2/code_reload/old
+ok
+2> c(frequency2).
+{ok,frequency2}
+3> frequency2:start().
+true
+4> frequency2:allocate().
+{ok,10}
+5> frequency2:allocate().
+{ok,11}
+6> frequency2:allocate().
+{ok,12}
+7> frequency2:allocate().
+{ok,13}
+8> frequency2:allocate().
+{ok,14}
+9> frequency2:allocate().
+{ok,15}
+10> frequency2:allocate().
+{error,no_frequency}
+11> cd("../new").
+/home/cell/code/erlang_mooc/cp/wk2/code_reload/new
+ok
+12> c(frequency2).
+{ok,frequency2}
+13> code:load_file(frequency2).
+{error,not_purged}
+14> 
+=ERROR REPORT==== 15-Apr-2017::14:03:29 ===
+Loading of /home/cell/code/erlang_mooc/cp/wk2/code_reload/new/frequency2.beam failed: not_purged
+
+14> frequency2:allocate().
+{error,no_frequency}
+15> frequency2:inject([20,21,22,23]).
+ok
+16> frequency2:allocate().
+{ok,20}
+17> frequency2:deallocate(14).
+ok
+
